@@ -105,5 +105,22 @@ for t in sorted_list:
     for j in range(0, 3):
         switches[j] += lancelot_dist[tasks][j] * prob
 
+to_plot = []
 for (idx, v) in enumerate(switches):
+    to_plot.append((idx, v))
     print('The prob of Lancelot switches %d times is %.4f' % (idx, v))
+
+plt.bar([x[0] for x in to_plot], [x[1] for x in to_plot], width=0.4, facecolor='#9999ff', edgecolor='white')
+plt.gca().axes.get_xaxis().set_visible(False)
+
+for (x, y) in to_plot:
+    # import pdb;pdb.set_trace()
+    plt.text(x, -0.07, '兰斯洛特互换%s次' % str(x), ha='center',
+             va='bottom', fontproperties=myfont)
+    plt.text(x, y + 0.05, '%s' % ('%.2f' % y), ha='center', va='bottom')
+
+plt.ylim(0, 1)
+
+plt.ylabel('概 率', fontproperties=myfont, fontsize=12)
+plt.title('兰斯洛特互换次数分布', fontproperties=myfont, fontsize=12)
+plt.show()
