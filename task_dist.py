@@ -1,4 +1,9 @@
 import random
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+
+myfont = fm.FontProperties(fname='/Users/ludaming/Downloads/msyh.ttf')
+
 
 NUM_EPOCH = 10
 # NUM_EPOCH = 100
@@ -61,7 +66,23 @@ for k, v in task_num_dist.items():
 for t in sorted_list:
     print('Tasks of %d has %.4f probability' % (t[0], t[1]))
 
+plt.bar([x[0] for x in sorted_list], [x[1] for x in sorted_list], width=0.4, facecolor='#9999ff', edgecolor='white')
+plt.gca().axes.get_xaxis().set_visible(False)
 
+for (x, y) in sorted_list:
+    # import pdb;pdb.set_trace()
+    plt.text(x, -0.07, '做 %s 次任务' % str(x), ha='center',
+             va='bottom', fontproperties=myfont)
+    plt.text(x, y + 0.05, '%s' % str(y), ha='center', va='bottom')
+
+plt.ylim(0, 1)
+
+plt.ylabel('概 率', fontproperties=myfont, fontsize=12)
+plt.title('阿瓦隆抵抗组织做任务次数的分布', fontproperties=myfont, fontsize=12)
+plt.show()
+
+
+# import pdb;pdb.set_trace()
 # print(lancelot_dist)
 print('\nlancelot switches disttribution:\n')
 for i in range(3,6):
